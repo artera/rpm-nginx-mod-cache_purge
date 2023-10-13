@@ -42,7 +42,6 @@ Module with ability to purge content from FastCGI, proxy, SCGI and uWSGI nginx c
 
 %build
 cd %{_builddir}/nginx-%{_nginxver}
-export CFLAGS="$CFLAGS -Wno-error=cast-function-type"
 ./configure --with-compat --add-dynamic-module=../ngx_%{_modname}-%{version}
 make modules
 
