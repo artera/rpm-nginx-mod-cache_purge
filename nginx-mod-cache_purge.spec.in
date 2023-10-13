@@ -1,7 +1,7 @@
 Summary: Module with ability to purge content from FastCGI, proxy, SCGI and uWSGI nginx caches
 Name: nginx-mod-cache_purge
-Version: 2.5
-Release: 2%{?dist}
+Version: 2.5.2
+Release: 1%{?dist}
 Vendor: Artera
 URL: https://github.com/nginx-modules/ngx_cache_purge
 
@@ -24,7 +24,6 @@ BuildRequires: pcre-devel
 BuildRequires: zlib-devel
 BuildRequires: perl-devel
 BuildRequires: gd-devel
-BuildRequires: GeoIP-devel
 BuildRequires: libxslt-devel
 BuildRequires: perl-devel
 BuildRequires: perl(ExtUtils::Embed)
@@ -43,6 +42,7 @@ Module with ability to purge content from FastCGI, proxy, SCGI and uWSGI nginx c
 
 %build
 cd %{_builddir}/nginx-%{_nginxver}
+export CFLAGS="$CFLAGS -Wno-error=cast-function-type"
 ./configure %(nginx -V 2>&1 | grep 'configure arguments' | sed -r 's@^[^:]+: @@') --add-dynamic-module=../ngx_%{_modname}-%{version}
 make modules
 
